@@ -1,9 +1,9 @@
 const Profile = () =>{
 
     return(
-        <diV>
+        <div>
             Profile page
-        </diV>
+        </div>
     )
 }
 
