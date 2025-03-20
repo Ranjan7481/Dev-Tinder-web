@@ -6,6 +6,7 @@ import { BASEURL } from "../utils/constant";
 const Requests = () => {
   const requests = useSelector((store) => store.requests);
   const dispatch = useDispatch();
+
   const reviewRequest = async (status, _id) => {
     try {
       const res = axios.post(
@@ -22,22 +23,28 @@ const Requests = () => {
       const res = await axios.get(BASEURL + "/user/requests/received", {
         withCredentials: true,
       });
+
       dispatch(addRequests(res.data.data));
     } catch (err) {}
   };
+
   useEffect(() => {
     fetchRequests();
   }, []);
+
   if (!requests) return;
+
   if (requests.length === 0)
     return <h1 className="flex justify-center my-10"> No Requests Found</h1>;
 
   return (
     <div className="text-center my-10">
       <h1 className="text-bold text-white text-3xl">Connection Requests</h1>
+
       {requests.map((request) => {
         const { _id, firstName, lastName, photoUrl, age, gender, about } =
           request.fromUserId;
+
         return (
           <div
             key={_id}
@@ -60,13 +67,13 @@ const Requests = () => {
             <div>
               <button
                 className="btn btn-primary mx-2"
-                onClick={() => reviewRequest("rejected", requests._id)}
+                onClick={() => reviewRequest("rejected", request._id)}
               >
                 Reject
               </button>
               <button
                 className="btn btn-secondary mx-2"
-                onClick={() => reviewRequest("accepted", requests._id)}
+                onClick={() => reviewRequest("accepted", request._id)}
               >
                 Accept
               </button>
