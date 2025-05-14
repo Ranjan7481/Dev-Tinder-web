@@ -1,49 +1,73 @@
 import { useDispatch } from "react-redux";
 import { BASEURL } from "../utils/constant";
-import { removeUserFromFeed } from "../utils/FeedSlice";
+import { motion } from "framer-motion";
+import { X, Heart } from "react-feather";
 import axios from "axios";
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, onAction }) => {
   const { _id, firstName, lastName, photoUrl, age, gender, about } = user;
-
   const dispatch = useDispatch();
-  const handleSendRequest = async (status, userId) => {
+
+  const handleSendRequest = async (status) => {
     try {
-      const res = await axios.post(
-        BASEURL + "/request/send/" + status + "/" + userId,
+      await axios.post(
+        `${BASEURL}/request/send/${status}/${_id}`,
         {},
         { withCredentials: true }
       );
-      dispatch(removeUserFromFeed(userId));
-    } catch (err) {}
+      onAction(_id); // Inform Feed component to remove user
+    } catch (err) {
+      console.error("Request send error:", err);
+    }
   };
 
   return (
-    <div className="card bg-base-300 w-96 shadow-xl">
-      <figure >
-        <img src={user.photoUrl} alt="photo" />
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -50 }}
+      transition={{ duration: 0.5 }}
+      className="card bg-base-300 w-96 shadow-xl rounded-3xl overflow-hidden"
+    >
+      <figure>
+        <img
+          src={photoUrl || "/default-avatar.png"}
+          alt="User"
+          className="w-full h-80 object-cover"
+        />
       </figure>
-      <div className="card-body">
-        <h2 className="card-title">{firstName + " " + lastName}</h2>
-        {age && gender && <p>{age + ", " + gender}</p>}
-        <p>{about}</p>
-        <div className="card-actions justify-center my-4">
-          <button
-            className="btn btn-primary"
-            onClick={() => handleSendRequest("ignore", _id)}
+      <div className="card-body p-6">
+        <h2 className="card-title text-2xl font-bold">
+          {firstName} {lastName}
+        </h2>
+        {age && gender && (
+          <p className="text-lg text-gray-700">
+            {age}, {gender}
+          </p>
+        )}
+        {about && <p className="text-base text-gray-600">{about}</p>}
+
+        <div className="card-actions justify-center my-4 flex gap-4">
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => handleSendRequest("ignore")}
+            className="p-4 rounded-full bg-white shadow-lg"
           >
-            Ignore
-          </button>
-          <button
-            className="btn btn-secondary"
-            onClick={() => handleSendRequest("interested", _id)}
+            <X className="w-8 h-8 text-rose-500" />
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => handleSendRequest("interested")}
+            className="p-4 rounded-full bg-gradient-to-r from-rose-500 to-pink-500 shadow-lg"
           >
-            Interested
-          </button>
+            <Heart className="w-8 h-8 text-white" />
+          </motion.button>
         </div>
       </div>
-    </div>
-  
+    </motion.div>
   );
 };
+
 export default UserCard;

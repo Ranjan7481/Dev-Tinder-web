@@ -17,7 +17,7 @@ const NavBar = () => {
         }
       );
       dispatch(removeUser());
-      navigate("/login");
+      navigate("/home");
 
     } catch (err) {
       console.log(err);
@@ -26,9 +26,18 @@ const NavBar = () => {
   return (
     <div className="navbar bg-base-300">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl">
-          👩‍💻 DevTinder
-        </Link>
+      <button
+    onClick={() => {
+      if (user) {
+        navigate("/"); // Navigate to the feed page if the user is authenticated
+      } else {
+        navigate("/home"); // Navigate to the home page if the user is not authenticated
+      }
+    }}
+    className="btn btn-ghost text-xl"
+  >
+    👩‍💻 Connect Hub
+  </button>
       </div>
       {user && (
         <div className="flex-none gap-2">
@@ -58,7 +67,11 @@ const NavBar = () => {
               </li>
               <li>
                 <Link to="/requests">Requests</Link>
+
               </li>
+              <li>
+                 <Link to="/premium">Premium</Link>
+               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>
               </li>
