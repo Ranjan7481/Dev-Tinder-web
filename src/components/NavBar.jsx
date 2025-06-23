@@ -23,7 +23,7 @@ const NavBar = () => {
     <div className="navbar bg-gradient-to-r from-blue-600 to-cyan-400 text-white shadow-md">
       <div className="flex-1">
         <button
-          onClick={() => navigate(user ? "/feed" : "/home")}
+          onClick={() => navigate(user ? "/" : "/home")}
           className="btn btn-ghost text-2xl font-bold hover:text-yellow-300 transition-all"
         >
           👩‍💻 Connect Hub

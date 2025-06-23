@@ -18,16 +18,16 @@ function App() {
       <Provider store={appStore}>
         <BrowserRouter basename="/">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/body" element={<Body />}/>
-              <Route path="/feed" element={<Feed />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Body />}>
+              <Route path="/" element={<Feed />} />
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<Requests />} />
               <Route path="/chat/:targetUserId" element={<Chat />} />
               <Route path="/premium" element={<Premium />} />
-            
+            </Route>
           </Routes>
         </BrowserRouter>
       </Provider>
