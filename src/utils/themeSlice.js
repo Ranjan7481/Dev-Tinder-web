@@ -1,16 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const ThemeSlice= createSlice({
-    name: "theme",
-    initialState: 
-    {themes:false},
-    reducers:{
-        themeSelector:(state)=>{
-            state.themes=!state.themes;
-        }
-    }
-})
+const initialTheme = localStorage.getItem("theme") || "dracula";
 
-export default ThemeSlice.reducer;
+const themeSlice = createSlice({
+  name: "theme",
+  initialState: initialTheme,
+  reducers: {
+    toggleTheme: (state) => {
+      const newTheme = state === "winter" ? "dracula" : "winter";
+      localStorage.setItem("theme", newTheme);
+      document.documentElement.setAttribute("data-theme", newTheme);
+      return newTheme;
+    },
+  },
+});
 
-export const {themeSelector}= ThemeSlice.actions
+export const { toggleTheme } = themeSlice.actions;
+export const themeSelector = (state) => state.theme;
+export default themeSlice.reducer;

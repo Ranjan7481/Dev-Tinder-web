@@ -55,7 +55,7 @@ function Header() {
         />
 
         {/* Dark Icon */}
-        <svg
+        {/* <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -68,7 +68,7 @@ function Header() {
             strokeWidth={2}
             d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10"
           />
-        </svg>
+        </svg> */}
 
         <Link to="/login" className="btn btn-primary">
           Login/signup

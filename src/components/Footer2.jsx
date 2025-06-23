@@ -10,7 +10,7 @@ const Footer2 = () => {
                   src="https://www.logo.wine/a/logo/Tinder_(app)/Tinder_(app)-Flame-Logo.wine.svg"
                   alt="DevTinder Logo"
                 />
-                <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">DevTinder</span>
+                <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">ConnectHub</span>
               </a>
             </div>
             <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -18,10 +18,10 @@ const Footer2 = () => {
                 <h2 className="mb-6 text-sm font-semibold uppercase text-white">My Social Link</h2>
                 <ul className="text-gray-500 font-medium">
                   <li className="mb-4">
-                    <a href="https://rupesh-jha-portfolio.netlify.app/" className="hover:underline">My Portfolio</a>
+                    <a href="#" className="hover:underline">My Portfolio</a>
                   </li>
                   <li>
-                    <a href="https://www.linkedin.com/in/i-am-rupesh/" className="hover:underline">My Linkedin</a>
+                    <a href="#" className="hover:underline">My Linkedin</a>
                   </li>
                 </ul>
               </div>
@@ -52,7 +52,7 @@ const Footer2 = () => {
           <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
           <div className="sm:flex sm:items-center sm:justify-between">
             <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-              © 2024 <a href="#" className="hover:underline">DevTinder By Rupesh Jha</a>. All Rights Reserved.
+              © 2024 <a href="#" className="hover:underline">ConnectHub By Ranjan Kumar</a>. All Rights Reserved.
             </span>
             <div className="flex mt-4 sm:justify-center sm:mt-0">
               {/* Social icons */}

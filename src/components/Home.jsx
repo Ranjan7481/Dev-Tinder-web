@@ -103,7 +103,7 @@ const Home = () => {
       <main className="flex-grow"></main>
       <section className="relative h-screen">
         <img
-          src="https://tinder.com/static/build/8ad4e4299ef5e377d2ef00ba5c94c44c.webp"
+          src="https://png.pngtree.com/png-clipart/20240914/original/pngtree-developers-team-concept-in-flat-design-png-image_16004518.png"
           alt="Grid of profile cards showing various people"
           className="w-full h-full object-cover "
         />
@@ -148,7 +148,7 @@ const Home = () => {
       <section className="px-4 py-20 ">
         <div className="max-w-7xl mx-auto ">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 ">
-            How DevTinder Works
+            How ConnectHub Works
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -227,7 +227,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-rose-500 to-pink-500 text-transparent bg-clip-text">
-              DevTinder
+              ConnectHub
             </h1>
             <p className={`text-xl md:text-2xl mb-8 ${textColorClass}`}>
               Swipe Right for Your Perfect Code Partner
@@ -385,7 +385,7 @@ const Home = () => {
               className="animate-on-scroll"
             >
               <h3 className={`text-2xl font-bold mb-4 ${textColorClass}`}>
-                Take DevTinder Everywhere
+                Take ConnectHub Everywhere
               </h3>
               <p className={`mb-6 ${textColorClass}`}>
                 Download our mobile app and find code partners on the go.
@@ -478,7 +478,7 @@ const Home = () => {
           </motion.form>
 
           <p className="text-sm text-white text-opacity-80">
-            Join DevTinder today and start your journey to building meaningful
+            Join ConnectHub today and start your journey to building meaningful
             developer relationships!
           </p>
         </div>
