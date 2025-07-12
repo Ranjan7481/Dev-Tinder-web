@@ -25,26 +25,7 @@ import {
 } from "lucide-react";
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const userData = useSelector((store) => store.user);
-  // const fetchUser = async () => {
-  //   if (userData) return;
-  //   try {
-  //     const res = await axios.get(BASEURL + "/profile/view", {
-  //       withCredentials: true,
-  //     });
-  //     dispatch(addUser(res.data));
-  //   } catch (err) {
-  //     if (err.status === 401) {
-  //       navigate("/login");
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchUser();
-  // }, []);
+ 
   const textColorClass = themeSelector == true ? "text-zinc-900" : "text-white";
 
   const [currentIndex, setCurrentIndex] = useState(0);
