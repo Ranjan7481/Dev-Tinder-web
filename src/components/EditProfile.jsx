@@ -19,17 +19,15 @@ const EditProfile = ({ user }) => {
   const saveProfile = async () => {
     setError(""); // Clear previous errors
     try {
-      const res = await axios.patch(
-        BASEURL + "/profile/edit",
-        {
-          firstName,
-          lastName,
-          photoUrl,
-          age,
-          gender,
-          about,
+      const token = localStorage.getItem("token");
+    const res = await axios.patch(
+      BASEURL + "/profile/edit",
+      { firstName, lastName, photoUrl, age, gender, about },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        { withCredentials: true }
+      }
       );
       dispatch(addUser(res?.data?.data));
       setShowToast(true);

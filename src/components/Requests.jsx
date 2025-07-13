@@ -11,11 +11,17 @@ const Requests = () => {
 
   const reviewRequest = async (status, _id) => {
     try {
-      await axios.post(
-        BASEURL + "/request/review/" + status + "/" + _id,
-        {},
-        { withCredentials: true }
-      );
+        const token = localStorage.getItem("token");
+
+    await axios.post(
+      BASEURL + "/request/review/" + status + "/" + _id,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
       dispatch(removeRequest(_id));
     } catch (err) {
       console.error("Error reviewing request:", err);
@@ -24,9 +30,13 @@ const Requests = () => {
 
   const fetchRequests = async () => {
     try {
-      const res = await axios.get(BASEURL + "/user/requests/received", {
-        withCredentials: true,
-      });
+       const token = localStorage.getItem("token");
+
+    const res = await axios.get(BASEURL + "/user/requests/received", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
       dispatch(addRequests(res.data.data));
     } catch (err) {
       console.error("Error fetching requests:", err);

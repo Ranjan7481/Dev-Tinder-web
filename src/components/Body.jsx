@@ -14,19 +14,25 @@ const Body = () => {
   const userData = useSelector((store) => store.user);
 
   const fetchUser = async () => {
-    if (userData) return;
-    try {
-      const res = await axios.get(BASEURL + "/profile/view", {
-        withCredentials: true,
-      });
-      dispatch(addUser(res.data));
-    } catch (err) {
-      if (err.status === 401) {
-        navigate("/login");
-      }
-      console.error(err);
+  if (userData) return;
+
+  const token = localStorage.getItem("token");
+  if (!token) return navigate("/login");
+
+  try {
+    const res = await axios.get(BASEURL + "/profile/view", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dispatch(addUser(res.data));
+  } catch (err) {
+    if (err.response?.status === 401) {
+      navigate("/login");
     }
-  };
+    console.error(err);
+  }
+};
 
   useEffect(() => {
     fetchUser();

@@ -12,10 +12,13 @@ const Connections = () => {
 
   const fetchConnections = async () => {
     try {
-      const res = await axios.get(BASEURL + "/user/connections", {
-        withCredentials: true,
-      });
-      dispatch(addConnections(res.data.data));
+       const token = localStorage.getItem("token");
+    const res = await axios.get(BASEURL + "/user/connections", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dispatch(addConnections(res.data.data));
     } catch (err) {
       console.error("Error fetching connections:", err);
     }

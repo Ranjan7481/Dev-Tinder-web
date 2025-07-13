@@ -13,7 +13,12 @@ const Chat = () => {
   const userId = user?._id;
 
   const fetchChatMessages = async () => {
+     const token = localStorage.getItem("token");
+
     const chat = await axios.get(BASEURL + "/chat/" + targetUserId, {
+         headers: {
+      Authorization: `Bearer ${token}`,
+    },
       withCredentials: true,
     });
 
@@ -31,9 +36,15 @@ const Chat = () => {
 
   //delete chat
 
-  const deleteChat= async()=>{
+  const deleteChat= async()=>{ 
+     const token = localStorage.getItem("token");
 
     const res= await axios.delete(BASEURL + "/chatDelete/" + targetUserId, {
+        headers: {
+      Authorization: `Bearer ${token}`,
+    },
+
+
       withCredentials: true,
     });
    setMessages([]);

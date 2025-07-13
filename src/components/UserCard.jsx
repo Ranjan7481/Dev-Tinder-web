@@ -10,10 +10,16 @@ const UserCard = ({ user, onAction }) => {
 
   const handleSendRequest = async (status) => {
     try {
+      const token = localStorage.getItem("token");
+
       await axios.post(
         `${BASEURL}/request/send/${status}/${_id}`,
         {},
-        { withCredentials: true }
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       onAction(_id);
     } catch (err) {
