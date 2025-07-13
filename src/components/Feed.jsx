@@ -2,10 +2,7 @@ import axios from "axios";
 import { BASEURL } from "../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed, removeUserFromFeed } from "../utils/FeedSlice";
-import {
-  setSearchResults,
-  clearSearchResults,
-} from "../utils/SearchSlice";
+import { setSearchResults, clearSearchResults } from "../utils/SearchSlice";
 import { useEffect, useState } from "react";
 import UserCard from "./UserCard";
 
@@ -15,15 +12,30 @@ const Feed = () => {
   const search = useSelector((store) => store.search);
   const [searchTerm, setSearchTerm] = useState("");
 
+  // const getFeed = async () => {
+  //   if (feed && feed.length > 0) return;
+  //   try {
+  //     const res = await axios.get(BASEURL + "/feed", {
+  //       withCredentials: true,
+  //     });
+  //     dispatch(addFeed(res?.data?.data));
+  //   } catch (err) {
+  //     console.log("Feed fetch error:", err);
+  //   }
+  // };
   const getFeed = async () => {
     if (feed && feed.length > 0) return;
     try {
+      const token = localStorage.getItem("token"); // get JWT from storage
       const res = await axios.get(BASEURL + "/feed", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         withCredentials: true,
       });
       dispatch(addFeed(res?.data?.data));
     } catch (err) {
-      console.log("Feed fetch error:", err);
+      console.log("Feed fetch error:", err.response?.data || err.message);
     }
   };
 
@@ -35,6 +47,9 @@ const Feed = () => {
 
     try {
       const res = await axios.get(BASEURL + `/search?name=${searchTerm}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
         withCredentials: true,
       });
       dispatch(setSearchResults(res?.data?.data || []));
