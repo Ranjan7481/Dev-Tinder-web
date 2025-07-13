@@ -23,6 +23,10 @@ const Login = () => {
         { emailId, password },
         { withCredentials: true }
       );
+
+      const { token, data } = res.data;
+
+      localStorage.setItem("token", token); // Store JWT in local storage
       dispatch(addUser(res.data));
       return navigate("/feed");
     } catch (err) {
@@ -37,6 +41,10 @@ const Login = () => {
         { firstName, lastName, emailId, password },
         { withCredentials: true }
       );
+
+          const { token, data } = res.data;
+
+      localStorage.setItem("token", token); // Store JWT in local storage
       dispatch(addUser(res.data.data));
       return navigate("/profile");
     } catch (err) {
@@ -99,7 +107,9 @@ const Login = () => {
           </div>
 
           {error && (
-            <p className="text-sm text-red-400 font-medium text-center">{error}</p>
+            <p className="text-sm text-red-400 font-medium text-center">
+              {error}
+            </p>
           )}
 
           <button
