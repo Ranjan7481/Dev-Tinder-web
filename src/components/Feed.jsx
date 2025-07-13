@@ -12,26 +12,20 @@ const Feed = () => {
   const search = useSelector((store) => store.search);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // const getFeed = async () => {
-  //   if (feed && feed.length > 0) return;
-  //   try {
-  //     const res = await axios.get(BASEURL + "/feed", {
-  //       withCredentials: true,
-  //     });
-  //     dispatch(addFeed(res?.data?.data));
-  //   } catch (err) {
-  //     console.log("Feed fetch error:", err);
-  //   }
-  // };
   const getFeed = async () => {
     if (feed && feed.length > 0) return;
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.log("No token found in localStorage");
+      return;
+    }
+
     try {
-      const token = localStorage.getItem("token"); // get JWT from storage
       const res = await axios.get(BASEURL + "/feed", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        withCredentials: true,
       });
       dispatch(addFeed(res?.data?.data));
     } catch (err) {
@@ -45,16 +39,21 @@ const Feed = () => {
       return;
     }
 
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.log("No token found for search");
+      return;
+    }
+
     try {
       const res = await axios.get(BASEURL + `/search?name=${searchTerm}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${token}`,
         },
-        withCredentials: true,
       });
       dispatch(setSearchResults(res?.data?.data || []));
     } catch (err) {
-      console.log("Search error:", err);
+      console.log("Search error:", err.response?.data || err.message);
     }
   };
 
