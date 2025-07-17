@@ -61,6 +61,12 @@ const NavBar = () => {
                   Connections
                 </Link>
               </li>
+
+               <li>
+                <Link to="/changepassword" className="hover:bg-cyan-100 rounded-md p-2">
+                  Change-Password
+                </Link>
+              </li>
               <li>
                 <Link to="/requests" className="hover:bg-cyan-100 rounded-md p-2">
                   Requests

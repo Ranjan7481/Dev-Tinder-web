@@ -4,6 +4,7 @@ import { BASEURL } from "../utils/constant";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom"; // Changed to react-router-dom's Link
 
 const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
@@ -20,14 +21,14 @@ const EditProfile = ({ user }) => {
     setError(""); // Clear previous errors
     try {
       const token = localStorage.getItem("token");
-    const res = await axios.patch(
-      BASEURL + "/profile/edit",
-      { firstName, lastName, photoUrl, age, gender, about },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      const res = await axios.patch(
+        BASEURL + "/profile/edit",
+        { firstName, lastName, photoUrl, age, gender, about },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       dispatch(addUser(res?.data?.data));
       setShowToast(true);
@@ -42,9 +43,9 @@ const EditProfile = ({ user }) => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-indigo-600 to-pink-500 py-10">
       <div className="max-w-3xl mx-auto bg-white/20 backdrop-blur-md rounded-3xl shadow-2xl p-8">
-        {/* Edit Profile Form */}
         <div className="card bg-base-300 w-full shadow-xl p-8 rounded-3xl">
           <h2 className="text-3xl font-bold text-white mb-6 text-center">Edit Profile</h2>
+
           <div className="space-y-6 flex flex-col items-center">
             <label className="form-control w-full max-w-xs my-2">
               <span className="label-text text-white">First Name:</span>
@@ -79,14 +80,13 @@ const EditProfile = ({ user }) => {
             <label className="form-control w-full max-w-xs my-2">
               <span className="label-text text-white">Age:</span>
               <input
-                type="text"
+                type="number"
                 value={age}
                 className="input input-bordered input-lg w-full"
                 onChange={(e) => setAge(e.target.value)}
               />
             </label>
 
-            {/* Gender dropdown */}
             <label className="form-control w-full max-w-xs my-2">
               <span className="label-text text-white">Gender:</span>
               <select
@@ -100,7 +100,6 @@ const EditProfile = ({ user }) => {
               </select>
             </label>
 
-            {/* About textarea */}
             <label className="form-control w-full max-w-xs my-2">
               <span className="label-text text-white">About:</span>
               <textarea
@@ -112,21 +111,27 @@ const EditProfile = ({ user }) => {
             </label>
           </div>
 
-          {/* Error message */}
-          {error && <p className="text-red-500 text-center text-lg">{error}</p>}
+          {error && <p className="text-red-500 text-center text-lg mt-4">{error}</p>}
 
-          {/* Save Button */}
-          <div className="card-actions justify-center mt-6">
+          <div className="card-actions flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
             <button
-              className="btn btn-lg btn-primary transform hover:scale-105 transition-all duration-300"
+              className="btn btn-lg btn-secondary transform hover:scale-105 transition-all duration-300"
               onClick={saveProfile}
             >
               Save Profile
             </button>
+
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                to="/changepassword"
+                className="btn btn-outline btn-accent btn-lg"
+              >
+                Change Password
+              </Link>
+            </motion.div>
           </div>
         </div>
 
-        {/* Toast notification */}
         {showToast && (
           <motion.div
             initial={{ opacity: 0, y: 50 }}

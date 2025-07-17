@@ -12,6 +12,7 @@ import Chat from "./components/Chat";
 import Layout from "./components/Layout";
 import Home from "./components/Home";
 import Premium from "./components/Premium";
+import ChangePassword from "./components/ChangePassword";
 function App() {
   return (
     <>
@@ -33,6 +34,7 @@ function App() {
         <Route path="/requests" element={<Requests />} />
         <Route path="/chat/:targetUserId" element={<Chat />} />
         <Route path="/premium" element={<Premium />} />
+        <Route path="/changepassword" element={<ChangePassword />} />
       </Route>
     </Routes>
   </BrowserRouter>
